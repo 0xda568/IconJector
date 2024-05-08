@@ -5,7 +5,9 @@
 ## IconJector
 This is a Windows explorer DLL injection technique that uses the change icon dialog on Windows. 
 
-ADD MP4
+
+https://github.com/0xda568/IconJector/assets/61665703/bbf53775-ad8d-422b-b186-663ff5074976
+
 
 ## How does it work?
 Firstly, a folder is created in the temp directory and the properties of the folder are opened using SHObjectProperties. To retrieve the handle of the window, indentpendently of the system language, EnumWindows is used with a callback function that checks for the distinct folder name in every open window. 
@@ -32,7 +34,9 @@ On the newest Windows 10 version, however, it did work until I tried to open the
 ### Windows 11
 On Windows 11 the icon was displayed just like an a normal icon in the explorer view. When it is opened in the photo app, however, an error is displayed.
 
-ADD MP4 2
+
+https://github.com/0xda568/IconJector/assets/61665703/748c1012-1d2c-47dd-915f-860ffc6d1b05
+
 
 This behavior is certainly interesting, since an user that simply wants to change the icon of a folder may instead inject a malicious DLL into their explorer.
 
