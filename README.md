@@ -38,7 +38,11 @@ On Windows 11, the icon was displayed just like a normal icon in the Explorer vi
 https://github.com/0xda568/IconJector/assets/61665703/748c1012-1d2c-47dd-915f-860ffc6d1b05
 
 
-This behavior is certainly interesting, since a user who simply wants to change the icon of a folder may instead inject a malicious DLL into their explorer.
+This behavior is certainly interesting, since a user who simply wants to change the icon of a folder may instead inject a malicious DLL into their explorer. This might look like this:
+
+
+https://github.com/0xda568/IconJector/assets/61665703/06428402-764c-4279-b762-1d01082552c8
+
 
 ## Why?
 This is a very stealthy way to inject a DLL into the Explorer process because it doesn't use the usual DLL-injection API. It does produce two short popups, which aren't too disturbing, however. So it can be used as an AV evasion technique by a threat actor to execute code through the legitimate explorer process or to load a UMD rootkit. 
