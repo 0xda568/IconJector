@@ -5,9 +5,13 @@
 ## IconJector
 This is a Windows Explorer DLL injection technique that uses the change icon dialog on Windows. 
 
+It can trick users into loading a malicious DLL into their explorer process:
+
+https://github.com/0xda568/IconJector/assets/61665703/06428402-764c-4279-b762-1d01082552c8
+
+Additionally, it can be used to to inject a DLL from another process into the explorer:
 
 https://github.com/0xda568/IconJector/assets/61665703/bbf53775-ad8d-422b-b186-663ff5074976
-
 
 ## How does it work?
 Firstly, a folder is created in the temp directory, and the properties of the folder are opened using SHObjectProperties. To retrieve the handle of the window independently of the system language, EnumWindows is used with a callback function that checks for the distinct folder name in every open window. 
